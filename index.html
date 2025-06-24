@@ -1,157 +1,916 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Belajar Ekonomi SMK - Perdagangan</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduEkonomi - Belajar Sejarah Ekonomi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1s;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #555;
+            animation: fadeIn 1.5s;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .features {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        .materi-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .materi-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .materi-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .materi-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .quiz-section {
+            padding: 5rem 0;
+            background-color: #f5f7fa;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-header h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-header p {
+            color: #666;
+        }
+        
+        .quiz-progress {
+            height: 6px;
+            background-color: #e9ecef;
+            border-radius: 3px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .quiz-progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-container {
+            margin-bottom: 2rem;
+            animation: fadeIn 0.5s;
+        }
+        
+        .question {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .option {
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .option.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .option.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+        
+        .option.incorrect {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+        
+        .quiz-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .btn-next {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+        
+        .btn-submit {
+            background: linear-gradient(to right, var(--success), #38b6ff);
+        }
+        
+        .result-container {
+            text-align: center;
+            display: none;
+            animation: fadeIn 1s;
+        }
+        
+        .result-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--success);
+            margin: 1rem 0;
+        }
+        
+        .score-text {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .feedback {
+            margin-bottom: 2rem;
+        }
+        
+        .feedback p {
+            margin-bottom: 1rem;
+        }
+        
+        .btn-restart {
+            background: linear-gradient(to right, var(--warning), #ff9e00);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1.5rem;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(67, 97, 238, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
+            }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1.5rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .materi-content, .quiz-container {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.4rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+            }
+            
+            .footer-links li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <header>
-    <h1>📚 Belajar Ekonomi SMK</h1>
-    <p>Materi: Perdagangan Dalam Negeri & Internasional</p>
-  </header>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>EduEkonomi</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#materi">Materi</a></li>
+                        <li><a href="#quiz">Kuis</a></li>
+                        <li><a href="#tentang">Tentang</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-  <main>
-    <button onclick="window.location.href='materi.html'">📖 Baca Materi</button>
-    <button onclick="window.location.href='kuis.html'">📝 Mulai Kuis</button>
-  </main>
+    <section class="hero">
+        <div class="container">
+            <h1 class="animate_animated animate_fadeInDown">Sejarah Perkembangan Ekonomi</h1>
+            <p class="animate_animated animate_fadeIn">Pelajari perkembangan ekonomi dari masa ke masa dan uji pengetahuanmu dengan kuis interaktif yang menarik.</p>
+            <a href="#quiz" class="btn animate_animated animate_fadeInUp">Mulai Kuis Sekarang</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mengapa Belajar Sejarah Ekonomi?</h2>
+                <p>Memahami perkembangan ekonomi membantu kita menghargai sistem ekonomi saat ini</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate_animated animate_fadeInUp">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Pemahaman Mendalam</h3>
+                    <p>Memahami akar dari sistem ekonomi modern dan bagaimana perkembangannya dari masa ke masa.</p>
+                </div>
+                <div class="feature-card animate_animated animate_fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Analisis Kebijakan</h3>
+                    <p>Mempelajari kebijakan ekonomi masa lalu membantu mengevaluasi kebijakan saat ini.</p>
+                </div>
+                <div class="feature-card animate_animated animate_fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Perspektif Global</h3>
+                    <p>Memahami interaksi ekonomi global dan bagaimana negara-negara saling mempengaruhi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="materi" class="materi-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Materi Pembelajaran</h2>
+                <p>Ringkasan sejarah perkembangan ekonomi dunia dan Indonesia</p>
+            </div>
+            <div class="materi-content animate_animated animate_fadeIn">
+                <h3>Sejarah Perkembangan Ekonomi Dunia</h3>
+                <p>Perkembangan sistem ekonomi dunia dapat dibagi menjadi beberapa periode penting, dimulai dari sistem ekonomi tradisional, merkantilisme, lahirnya ekonomi klasik dengan Adam Smith, revolusi industri, munculnya ekonomi Keynesian, hingga ekonomi modern saat ini.</p>
+                
+                <h3 style="margin-top: 2rem;">Perkembangan Ekonomi Indonesia</h3>
+                <p>Ekonomi Indonesia telah melalui berbagai fase perkembangan, mulai dari masa kerajaan dengan sistem perdagangan rempah-rempah, masa kolonial dengan sistem tanam paksa, masa kemerdekaan dengan ekonomi terpimpin, Orde Baru dengan pembangunan ekonomi, hingga reformasi dengan ekonomi yang lebih terbuka.</p>
+                
+                <h3 style="margin-top: 2rem;">Tokoh-Tokoh Ekonomi Penting</h3>
+                <p>Beberapa tokoh ekonomi yang berpengaruh dalam perkembangan ekonomi dunia termasuk Adam Smith (bapak ekonomi modern), John Maynard Keynes (teori ekonomi makro), Karl Marx (ekonomi sosialis), dan Milton Friedman (ekonomi moneter). Di Indonesia, tokoh seperti Widjojo Nitisastro memainkan peran penting dalam pembangunan ekonomi.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="quiz-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kuis Interaktif</h2>
+                <p>Uji pemahamanmu tentang sejarah perkembangan ekonomi</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2>Kuis Sejarah Ekonomi</h2>
+                    <p>Jawablah 10 pertanyaan berikut untuk menguji pengetahuan Anda</p>
+                </div>
+                
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="progress-bar"></div>
+                </div>
+                
+                <div id="question-container" class="question-container">
+                    <div class="question" id="question">Pertanyaan akan muncul di sini</div>
+                    <div class="options" id="options">
+                        <!-- Opsi jawaban akan diisi oleh JavaScript -->
+                    </div>
+                </div>
+                
+                <div id="result-container" class="result-container">
+                    <h2>Hasil Kuis Anda</h2>
+                    <div class="score" id="score">0</div>
+                    <div class="score-text" id="score-text"></div>
+                    <div class="feedback" id="feedback"></div>
+                    <button id="restart-btn" class="btn btn-restart">Ulangi Kuis</button>
+                </div>
+                
+                <div class="quiz-footer">
+                    <div id="question-counter">Pertanyaan 1 dari 10</div>
+                    <button id="next-btn" class="btn btn-next">Selanjutnya</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="tentang">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-chart-line"></i> EduEkonomi
+                </div>
+                <ul class="footer-links">
+                    <li><a href="#materi">Materi</a></li>
+                    <li><a href="#quiz">Kuis</a></li>
+                    <li><a href="#tentang">Tentang</a></li>
+                    <li><a href="#">Kontak</a></li>
+                </ul>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 2023 EduEkonomi. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data pertanyaan dan jawaban
+            const questions = [
+                {
+                    question: "Siapa yang sering disebut sebagai 'Bapak Ekonomi Modern'?",
+                    options: ["Karl Marx", "John Maynard Keynes", "Adam Smith", "Milton Friedman"],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Sistem ekonomi apa yang dominan di Eropa pada abad 16-18 yang menekankan pada akumulasi logam mulia?",
+                    options: ["Feodalisme", "Merkantilisme", "Kapitalisme", "Sosialisme"],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Peristiwa ekonomi besar apa yang terjadi pada tahun 1929 yang mempengaruhi ekonomi global?",
+                    options: ["Revolusi Industri", "Great Depression", "Krisis Minyak 1973", "Resesi 2008"],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Apa nama sistem tanam paksa yang diterapkan Belanda di Indonesia pada abad 19?",
+                    options: ["Cultuurstelsel", "Landrent", "Pax Neerlandica", "Hindia Belanda"],
+                    correctAnswer: 0
+                },
+                {
+                    question: "Teori ekonomi siapa yang menjadi dasar New Deal di Amerika Serikat tahun 1930-an?",
+                    options: ["Adam Smith", "John Maynard Keynes", "David Ricardo", "Friedrich Hayek"],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Apa nama program ekonomi Indonesia pada masa Orde Baru yang fokus pada pembangunan?",
+                    options: ["Repelita", "Benteng", "Gunting Syafruddin", "Gerakan Benteng"],
+                    correctAnswer: 0
+                },
+                {
+                    question: "Krisis ekonomi tahun 1997 di Asia dimulai di negara mana?",
+                    options: ["Indonesia", "Thailand", "Korea Selatan", "Malaysia"],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Apa nama tokoh ekonomi Indonesia yang dikenal sebagai arsitek ekonomi Orde Baru?",
+                    options: ["Mohammad Hatta", "Sumitro Djojohadikusumo", "Widjojo Nitisastro", "Sjafruddin Prawiranegara"],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Revolusi Industri pertama dimulai di negara mana?",
+                    options: ["Amerika Serikat", "Jerman", "Inggris", "Prancis"],
+                    correctAnswer: 2
+                },
+                {
+                    question: "Apa nama kebijakan ekonomi Indonesia tahun 1950-an yang membatasi impor untuk melindungi industri dalam negeri?",
+                    options: ["Sistem Ekonomi Terpimpin", "Gerakan Benteng", "Nasionalisasi", "Demokrasi Ekonomi"],
+                    correctAnswer: 1
+                }
+            ];
+
+            // Variabel state kuis
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let selectedOption = null;
+            let quizCompleted = false;
+
+            // Elemen DOM
+            const questionElement = document.getElementById('question');
+            const optionsElement = document.getElementById('options');
+            const nextButton = document.getElementById('next-btn');
+            const resultContainer = document.getElementById('result-container');
+            const questionContainer = document.getElementById('question-container');
+            const scoreElement = document.getElementById('score');
+            const scoreTextElement = document.getElementById('score-text');
+            const feedbackElement = document.getElementById('feedback');
+            const restartButton = document.getElementById('restart-btn');
+            const questionCounter = document.getElementById('question-counter');
+            const progressBar = document.getElementById('progress-bar');
+
+            // Fungsi untuk menampilkan pertanyaan
+            function showQuestion() {
+                if (currentQuestionIndex >= questions.length) {
+                    showResult();
+                    return;
+                }
+
+                const question = questions[currentQuestionIndex];
+                questionElement.textContent = question.question;
+                optionsElement.innerHTML = '';
+                selectedOption = null;
+
+                // Update counter
+                questionCounter.textContent = Pertanyaan ${currentQuestionIndex + 1} dari ${questions.length};
+                
+                // Update progress bar
+                progressBar.style.width = ${((currentQuestionIndex) / questions.length) * 100}%;
+
+                // Buat opsi jawaban
+                question.options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('option');
+                    optionElement.textContent = option;
+                    optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                    optionsElement.appendChild(optionElement);
+                });
+
+                // Sembunyikan tombol next jika belum memilih jawaban
+                nextButton.style.display = 'none';
+            }
+
+            // Fungsi untuk memilih opsi
+            function selectOption(optionElement, optionIndex) {
+                if (quizCompleted) return;
+
+                // Hapus seleksi sebelumnya
+                const options = document.querySelectorAll('.option');
+                options.forEach(opt => opt.classList.remove('selected'));
+
+                // Tandai opsi yang dipilih
+                optionElement.classList.add('selected');
+                selectedOption = optionIndex;
+
+                // Tampilkan tombol next
+                nextButton.style.display = 'inline-block';
+            }
+
+            // Fungsi untuk mengecek jawaban
+            function checkAnswer() {
+                if (selectedOption === null) return;
+
+                const question = questions[currentQuestionIndex];
+                const options = document.querySelectorAll('.option');
+
+                // Tandai jawaban yang benar dan salah
+                options.forEach((option, index) => {
+                    option.classList.remove('correct', 'incorrect');
+                    if (index === question.correctAnswer) {
+                        option.classList.add('correct');
+                    } else if (index === selectedOption && selectedOption !== question.correctAnswer) {
+                        option.classList.add('incorrect');
+                    }
+                });
+
+                // Hitung skor jika jawaban benar
+                if (selectedOption === question.correctAnswer) {
+                    score++;
+                }
+
+                // Nonaktifkan semua opsi
+                options.forEach(option => {
+                    option.style.pointerEvents = 'none';
+                });
+
+                // Update tombol next
+                if (currentQuestionIndex === questions.length - 1) {
+                    nextButton.textContent = 'Lihat Hasil';
+                } else {
+                    nextButton.textContent = 'Selanjutnya';
+                }
+            }
+
+            // Fungsi untuk menampilkan hasil
+            function showResult() {
+                questionContainer.style.display = 'none';
+                resultContainer.style.display = 'block';
+                document.querySelector('.quiz-footer').style.display = 'none';
+                progressBar.style.width = '100%';
+                quizCompleted = true;
+
+                // Hitung persentase
+                const percentage = (score / questions.length) * 100;
+                scoreElement.textContent = ${score}/${questions.length};
+
+                // Berikan feedback berdasarkan skor
+                if (percentage >= 80) {
+                    scoreTextElement.textContent = "Luar biasa! Anda sangat menguasai materi sejarah ekonomi.";
+                    feedbackElement.innerHTML = "<p>Pengetahuan Anda tentang perkembangan ekonomi sangat baik. Pertahankan!</p>";
+                } else if (percentage >= 60) {
+                    scoreTextElement.textContent = "Bagus! Anda memiliki pemahaman yang cukup tentang sejarah ekonomi.";
+                    feedbackElement.innerHTML = "<p>Anda sudah memahami banyak konsep dasar, tetapi masih ada ruang untuk meningkatkan pengetahuan Anda.</p>";
+                } else if (percentage >= 40) {
+                    scoreTextElement.textContent = "Cukup baik. Anda memiliki beberapa pengetahuan tentang sejarah ekonomi.";
+                    feedbackElement.innerHTML = "<p>Anda mungkin perlu mempelajari kembali beberapa bagian materi untuk memperdalam pemahaman.</p>";
+                } else {
+                    scoreTextElement.textContent = "Anda mungkin perlu belajar lebih banyak tentang sejarah ekonomi.";
+                    feedbackElement.innerHTML = "<p>Jangan khawatir! Pelajari kembali materi dan coba lagi nanti.</p>";
+                }
+
+                // Animasi skor
+                animateValue(scoreElement, 0, score, 1000);
+            }
+
+            // Fungsi animasi angka
+            function animateValue(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const currentValue = Math.floor(progress * (end - start) + start);
+                    element.textContent = ${currentValue}/${questions.length};
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            // Fungsi reset kuis
+            function resetQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                selectedOption = null;
+                quizCompleted = false;
+                
+                questionContainer.style.display = 'block';
+                resultContainer.style.display = 'none';
+                document.querySelector('.quiz-footer').style.display = 'flex';
+                
+                showQuestion();
+            }
+
+            // Event listeners
+            nextButton.addEventListener('click', () => {
+                if (selectedOption === null && currentQuestionIndex < questions.length) return;
+                
+                if (selectedOption !== null && !quizCompleted) {
+                    checkAnswer();
+                    
+                    // Tunggu sebentar sebelum pindah ke pertanyaan berikutnya
+                    setTimeout(() => {
+                        currentQuestionIndex++;
+                        showQuestion();
+                    }, 1000);
+                } else if (currentQuestionIndex === questions.length) {
+                    showResult();
+                }
+            });
+
+            restartButton.addEventListener('click', resetQuiz);
+
+            // Mulai kuis
+            showQuestion();
+
+            // Animasi scroll halus untuk link navigasi
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Materi Perdagangan</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1>📖 Materi Perdagangan</h1>
-  </header>
-
-  <main>
-    <h2>1. Perdagangan Dalam Negeri</h2>
-    <p>Perdagangan dalam negeri adalah aktivitas jual beli barang atau jasa yang dilakukan antarwilayah dalam satu negara.</p>
-
-    <h2>2. Perdagangan Internasional</h2>
-    <p>Perdagangan internasional adalah kegiatan jual beli antarnegara untuk memenuhi kebutuhan masing-masing negara.</p>
-
-    <a href="index.html">⬅️ Kembali</a>
-  </main>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Kuis Ekonomi</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <main>
-    <h1>📝 Kuis: Perdagangan</h1>
-    <div id="quiz-container">
-      <p id="question">Memuat soal...</p>
-      <div id="options"></div>
-      <button onclick="nextQuestion()">Soal Selanjutnya</button>
-      <p id="score"></p>
-    </div>
-    <a href="index.html">⬅️ Kembali</a>
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
-const questions = [
-  {
-    question: "Apa yang dimaksud dengan perdagangan dalam negeri?",
-    options: [
-      "Kegiatan ekspor barang ke luar negeri",
-      "Jual beli antarwilayah dalam satu negara",
-      "Transaksi antara dua perusahaan internasional",
-      "Kegiatan ekspor-impor antarnegara"
-    ],
-    answer: 1
-  },
-  {
-    question: "Perdagangan internasional terjadi antar...",
-    options: [
-      "Kelurahan",
-      "Wilayah provinsi",
-      "Negara",
-      "Kota"
-    ],
-    answer: 2
-  }
-];
-
-let currentQuestion = 0;
-let score = 0;
-
-function showQuestion() {
-  const q = questions[currentQuestion];
-  document.getElementById("question").textContent = q.question;
-
-  const optionsDiv = document.getElementById("options");
-  optionsDiv.innerHTML = "";
-
-  q.options.forEach((opt, i) => {
-    const btn = document.createElement("button");
-    btn.textContent = opt;
-    btn.onclick = () => checkAnswer(i);
-    optionsDiv.appendChild(btn);
-  });
-}
-
-function checkAnswer(selected) {
-  const correct = questions[currentQuestion].answer;
-  if (selected === correct) {
-    alert("✅ Benar!");
-    score++;
-  } else {
-    alert("❌ Salah.");
-  }
-  currentQuestion++;
-  nextQuestion();
-}
-
-function nextQuestion() {
-  if (currentQuestion < questions.length) {
-    showQuestion();
-  } else {
-    document.getElementById("quiz-container").innerHTML = `
-      <h2>🎉 Kuis Selesai!</h2>
-      <p>Skor kamu: ${score} dari ${questions.length}</p>
-    `;
-  }
-}
-
-window.onload = showQuestion;
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f2f5;
-  text-align: center;
-  padding: 20px;
-}
-
-header {
-  background-color: #2d6cdf;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-main {
-  margin-top: 20px;
-}
-
-button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-#quiz-container {
-  margin-top: 30px;
-}
