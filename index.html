@@ -1,253 +1,624 @@
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Data pertanyaan dan jawaban
-        const questions = [
-            {
-                question: "Siapa yang sering disebut sebagai 'Bapak Ekonomi Modern'?",
-                options: ["Karl Marx", "John Maynard Keynes", "Adam Smith", "Milton Friedman"],
-                correctAnswer: 2
-            },
-            {
-                question: "Sistem ekonomi apa yang dominan di Eropa pada abad 16-18 yang menekankan pada akumulasi logam mulia?",
-                options: ["Feodalisme", "Merkantilisme", "Kapitalisme", "Sosialisme"],
-                correctAnswer: 1
-            },
-            {
-                question: "Peristiwa ekonomi besar apa yang terjadi pada tahun 1929 yang mempengaruhi ekonomi global?",
-                options: ["Revolusi Industri", "Great Depression", "Krisis Minyak 1973", "Resesi 2008"],
-                correctAnswer: 1
-            },
-            {
-                question: "Apa nama sistem tanam paksa yang diterapkan Belanda di Indonesia pada abad 19?",
-                options: ["Cultuurstelsel", "Landrent", "Pax Neerlandica", "Hindia Belanda"],
-                correctAnswer: 0
-            },
-            {
-                question: "Teori ekonomi siapa yang menjadi dasar New Deal di Amerika Serikat tahun 1930-an?",
-                options: ["Adam Smith", "John Maynard Keynes", "David Ricardo", "Friedrich Hayek"],
-                correctAnswer: 1
-            },
-            {
-                question: "Apa nama program ekonomi Indonesia pada masa Orde Baru yang fokus pada pembangunan?",
-                options: ["Repelita", "Benteng", "Gunting Syafruddin", "Gerakan Benteng"],
-                correctAnswer: 0
-            },
-            {
-                question: "Krisis ekonomi tahun 1997 di Asia dimulai di negara mana?",
-                options: ["Indonesia", "Thailand", "Korea Selatan", "Malaysia"],
-                correctAnswer: 1
-            },
-            {
-                question: "Apa nama tokoh ekonomi Indonesia yang dikenal sebagai arsitek ekonomi Orde Baru?",
-                options: ["Mohammad Hatta", "Sumitro Djojohadikusumo", "Widjojo Nitisastro", "Sjafruddin Prawiranegara"],
-                correctAnswer: 2
-            },
-            {
-                question: "Revolusi Industri pertama dimulai di negara mana?",
-                options: ["Amerika Serikat", "Jerman", "Inggris", "Prancis"],
-                correctAnswer: 2
-            },
-            {
-                question: "Apa nama kebijakan ekonomi Indonesia tahun 1950-an yang membatasi impor untuk melindungi industri dalam negeri?",
-                options: ["Sistem Ekonomi Terpimpin", "Gerakan Benteng", "Nasionalisasi", "Demokrasi Ekonomi"],
-                correctAnswer: 1
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduEkonomi - Sejarah Perkembangan Ekonomi</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: var(--dark-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+        
+        .content-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .content-section h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .content-section p {
+            margin-bottom: 1rem;
+        }
+        
+        .content-section ul, .content-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sidebar {
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+        }
+        
+        .sidebar-widget {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-widget h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .quiz-container h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .quiz-question {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .quiz-question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .quiz-question h3 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 0.8rem;
+        }
+        
+        .quiz-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quiz-option input {
+            margin-right: 0.8rem;
+        }
+        
+        .quiz-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 2rem auto 0;
+            transition: background-color 0.3s;
+        }
+        
+        .quiz-submit:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .result-container {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .result-container h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+        
+        .feedback {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .try-again {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .try-again:hover {
+            background-color: #27ae60;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        footer p {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
             }
-        ];
-
-        // Variabel state kuis
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let selectedOption = null;
-        let quizCompleted = false;
-
-        // Elemen DOM
-        const questionElement = document.getElementById('question');
-        const optionsElement = document.getElementById('options');
-        const nextButton = document.getElementById('next-btn');
-        const resultContainer = document.getElementById('result-container');
-        const questionContainer = document.getElementById('question-container');
-        const scoreElement = document.getElementById('score');
-        const scoreTextElement = document.getElementById('score-text');
-        const feedbackElement = document.getElementById('feedback');
-        const restartButton = document.getElementById('restart-btn');
-        const questionCounter = document.getElementById('question-counter');
-        const progressBar = document.getElementById('progress-bar');
-
-        // Fungsi untuk menampilkan pertanyaan
-        function showQuestion() {
-            if (currentQuestionIndex >= questions.length) {
-                showResult();
-                return;
-            }
-
-            const question = questions[currentQuestionIndex];
-            questionElement.textContent = question.question;
-            optionsElement.innerHTML = '';
-            selectedOption = null;
-
-            // Update counter
-            questionCounter.textContent = Pertanyaan ${currentQuestionIndex + 1} dari ${questions.length};
             
-            // Update progress bar
-            progressBar.style.width = ${((currentQuestionIndex) / questions.length) * 100}%;
-
-            // Buat opsi jawaban
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                optionElement.textContent = option;
-                optionElement.addEventListener('click', () => selectOption(optionElement, index));
-                optionsElement.appendChild(optionElement);
-            });
-
-            // Sembunyikan tombol next jika belum memilih jawaban
-            nextButton.style.display = 'none';
-            nextButton.disabled = true;
-        }
-
-        // Fungsi untuk memilih opsi
-        function selectOption(optionElement, optionIndex) {
-            if (quizCompleted) return;
-
-            // Hapus seleksi sebelumnya
-            const options = document.querySelectorAll('.option');
-            options.forEach(opt => opt.classList.remove('selected'));
-
-            // Tandai opsi yang dipilih
-            optionElement.classList.add('selected');
-            selectedOption = optionIndex;
-
-            // Tampilkan tombol next
-            nextButton.style.display = 'inline-block';
-            nextButton.disabled = false;
-        }
-
-        // Fungsi untuk mengecek jawaban
-        function checkAnswer() {
-            if (selectedOption === null) return;
-
-            const question = questions[currentQuestionIndex];
-            const options = document.querySelectorAll('.option');
-
-            // Tandai jawaban yang benar dan salah
-            options.forEach((option, index) => {
-                option.classList.remove('correct', 'incorrect');
-                if (index === question.correctAnswer) {
-                    option.classList.add('correct');
-                } else if (index === selectedOption && selectedOption !== question.correctAnswer) {
-                    option.classList.add('incorrect');
-                }
-            });
-
-            // Hitung skor jika jawaban benar
-            if (selectedOption === question.correctAnswer) {
-                score++;
+            nav ul {
+                flex-direction: column;
+                align-items: center;
             }
-
-            // Nonaktifkan semua opsi
-            options.forEach(option => {
-                option.style.pointerEvents = 'none';
-            });
-
-            // Update tombol next
-            if (currentQuestionIndex === questions.length - 1) {
-                nextButton.textContent = 'Lihat Hasil';
-            } else {
-                nextButton.textContent = 'Selanjutnya';
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .sidebar {
+                position: static;
             }
         }
-
-        // Fungsi untuk menampilkan hasil
-        function showResult() {
-            questionContainer.style.display = 'none';
-            resultContainer.style.display = 'block';
-            document.querySelector('.quiz-footer').style.display = 'none';
-            progressBar.style.width = '100%';
-            quizCompleted = true;
-
-            // Hitung persentase
-            const percentage = (score / questions.length) * 100;
-            scoreElement.textContent = ${score}/${questions.length};
-
-            // Berikan feedback berdasarkan skor
-            if (percentage >= 80) {
-                scoreTextElement.textContent = "Luar biasa! Anda sangat menguasai materi sejarah ekonomi.";
-                feedbackElement.innerHTML = "<p>Pengetahuan Anda tentang perkembangan ekonomi sangat baik. Pertahankan!</p>";
-            } else if (percentage >= 60) {
-                scoreTextElement.textContent = "Bagus! Anda memiliki pemahaman yang cukup tentang sejarah ekonomi.";
-                feedbackElement.innerHTML = "<p>Anda sudah memahami banyak konsep dasar, tetapi masih ada ruang untuk meningkatkan pengetahuan Anda.</p>";
-            } else if (percentage >= 40) {
-                scoreTextElement.textContent = "Cukup baik. Anda memiliki beberapa pengetahuan tentang sejarah ekonomi.";
-                feedbackElement.innerHTML = "<p>Anda mungkin perlu mempelajari kembali beberapa bagian materi untuk memperdalam pemahaman.</p>";
-            } else {
-                scoreTextElement.textContent = "Anda mungkin perlu belajar lebih banyak tentang sejarah ekonomi.";
-                feedbackElement.innerHTML = "<p>Jangan khawatir! Pelajari kembali materi dan coba lagi nanti.</p>";
-            }
-
-            // Animasi skor
-            animateValue(scoreElement, 0, score, 1000);
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
-        // Fungsi animasi angka
-        function animateValue(element, start, end, duration) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const currentValue = Math.floor(progress * (end - start) + start);
-                element.textContent = ${currentValue}/${questions.length};
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
+        
+        .content-section, .sidebar-widget, .quiz-container {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        /* Highlight correct answers */
+        .correct {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .incorrect {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sejarah Perkembangan Ekonomi</h1>
+            <p>Materi Pembelajaran Ekonomi untuk SMA Kelas XI</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#pengertian">Pengertian</a></li>
+                <li><a href="#periode">Periode Sejarah</a></li>
+                <li><a href="#tokoh">Tokoh Ekonomi</a></li>
+                <li><a href="#teori">Teori Ekonomi</a></li>
+                <li><a href="#kuis">Kuis</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="main-content">
+            <main>
+                <section id="pengertian" class="content-section">
+                    <h2>Pengertian Sejarah Perkembangan Ekonomi</h2>
+                    <p>Sejarah perkembangan ekonomi adalah studi tentang bagaimana sistem ekonomi telah berubah dan berkembang dari waktu ke waktu, mulai dari masyarakat primitif hingga ekonomi modern yang kompleks saat ini.</p>
+                    <p>Pemahaman tentang sejarah ekonomi membantu kita untuk:</p>
+                    <ul>
+                        <li>Memahami akar dari sistem ekonomi modern</li>
+                        <li>Mempelajari pola perubahan ekonomi</li>
+                        <li>Menganalisis dampak kebijakan ekonomi di masa lalu</li>
+                        <li>Memprediksi tren ekonomi di masa depan</li>
+                    </ul>
+                </section>
+                
+                <section id="periode" class="content-section">
+                    <h2>Periode Sejarah Perkembangan Ekonomi</h2>
+                    
+                    <h3>1. Masa Pra-Sejarah (Ekonomi Subsisten)</h3>
+                    <p>Masyarakat hidup dengan berburu dan meramu, belum ada sistem pertukaran yang terorganisir. Produksi hanya untuk memenuhi kebutuhan sendiri (subsisten).</p>
+                    
+                    <h3>2. Masa Pertanian (8000 SM - 1500 M)</h3>
+                    <p>Revolusi pertanian memungkinkan manusia menetap dan menghasilkan surplus makanan. Munculnya sistem barter dan pembagian kerja sederhana.</p>
+                    
+                    <h3>3. Masa Feodal (Abad 5-15 M)</h3>
+                    <p>Sistem ekonomi didominasi oleh tuan tanah (feodal) dan petani penggarap. Perdagangan mulai berkembang di kota-kota.</p>
+                    
+                    <h3>4. Masa Merkantilisme (Abad 16-18)</h3>
+                    <p>Negara mengumpulkan kekayaan melalui perdagangan dengan koloni. Prinsip utama adalah neraca perdagangan yang positif.</p>
+                    
+                    <h3>5. Revolusi Industri (1760-1840)</h3>
+                    <p>Perubahan dari ekonomi agraris ke industri. Mekanisasi produksi dan munculnya pabrik-pabrik besar.</p>
+                    
+                    <h3>6. Kapitalisme Modern (1840-Sekarang)</h3>
+                    <p>Perkembangan sistem ekonomi berbasis pasar bebas dengan campur tangan pemerintah yang terbatas.</p>
+                </section>
+                
+                <section id="tokoh" class="content-section">
+                    <h2>Tokoh-Tokoh Penting dalam Sejarah Ekonomi</h2>
+                    
+                    <h3>1. Adam Smith (1723-1790)</h3>
+                    <p>Bapak ekonomi modern, penulis "The Wealth of Nations" yang memperkenalkan konsep invisible hand dan keunggulan absolut.</p>
+                    
+                    <h3>2. Karl Marx (1818-1883)</h3>
+                    <p>Penggagas ekonomi sosialis, menulis "Das Kapital" yang mengkritik sistem kapitalis.</p>
+                    
+                    <h3>3. John Maynard Keynes (1883-1946)</h3>
+                    <p>Pencetus teori ekonomi Keynesian yang menekankan peran pemerintah dalam mengatur ekonomi.</p>
+                    
+                    <h3>4. Milton Friedman (1912-2006)</h3>
+                    <p>Pemimpin aliran monetaris yang menekankan pentingnya pengendalian jumlah uang beredar.</p>
+                </section>
+                
+                <section id="teori" class="content-section">
+                    <h2>Teori-Teori Ekonomi Penting</h2>
+                    
+                    <h3>1. Teori Klasik (Adam Smith, David Ricardo)</h3>
+                    <p>Pasar bebas akan mencapai keseimbangan optimal tanpa campur tangan pemerintah.</p>
+                    
+                    <h3>2. Teori Marxis</h3>
+                    <p>Kapitalisme akan runtuh karena kontradiksi internal dan digantikan oleh sosialisme.</p>
+                    
+                    <h3>3. Teori Keynesian</h3>
+                    <p>Pemerintah harus campur tangan melalui kebijakan fiskal dan moneter untuk menstabilkan ekonomi.</p>
+                    
+                    <h3>4. Teori Monetaris</h3>
+                    <p>Inflasi selalu dan di mana-mana adalah fenomena moneter, penekanan pada pengendalian jumlah uang beredar.</p>
+                </section>
+                
+                <section id="kuis" class="quiz-container">
+                    <h2>Kuis Sejarah Perkembangan Ekonomi</h2>
+                    
+                    <form id="quiz-form">
+                        <div class="quiz-question">
+                            <h3>1. Sistem ekonomi apa yang dominan sebelum Revolusi Industri?</h3>
+                            <div class="quiz-options">
+                                <label class="quiz-option"><input type="radio" name="q1" value="a"> Kapitalis</label>
+                                <label class="quiz-option"><input type="radio" name="q1" value="b"> Feodal</label>
+                                <label class="quiz-option"><input type="radio" name="q1" value="c"> Sosialis</label>
+                                <label class="quiz-option"><input type="radio" name="q1" value="d"> Merkantilis</label>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-question">
+                            <h3>2. Siapakah yang disebut sebagai "Bapak Ekonomi Modern"?</h3>
+                            <div class="quiz-options">
+                                <label class="quiz-option"><input type="radio" name="q2" value="a"> Karl Marx</label>
+                                <label class="quiz-option"><input type="radio" name="q2" value="b"> John Maynard Keynes</label>
+                                <label class="quiz-option"><input type="radio" name="q2" value="c"> Adam Smith</label>
+                                <label class="quiz-option"><input type="radio" name="q2" value="d"> Milton Friedman</label>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-question">
+                            <h3>3. Konsep apa yang diperkenalkan oleh Adam Smith dalam "The Wealth of Nations"?</h3>
+                            <div class="quiz-options">
+                                <label class="quiz-option"><input type="radio" name="q3" value="a"> Tangan tak terlihat</label>
+                                <label class="quiz-option"><input type="radio" name="q3" value="b"> Revolusi proletar</label>
+                                <label class="quiz-option"><input type="radio" name="q3" value="c"> Multiplier effect</label>
+                                <label class="quiz-option"><input type="radio" name="q3" value="d"> Quantity theory of money</label>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-question">
+                            <h3>4. Sistem ekonomi merkantilisme menekankan pentingnya...</h3>
+                            <div class="quiz-options">
+                                <label class="quiz-option"><input type="radio" name="q4" value="a"> Neraca perdagangan positif</label>
+                                <label class="quiz-option"><input type="radio" name="q4" value="b"> Kebebasan individu</label>
+                                <label class="quiz-option"><input type="radio" name="q4" value="c"> Kepemilikan bersama</label>
+                                <label class="quiz-option"><input type="radio" name="q4" value="d"> Campur tangan pemerintah minimal</label>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-question">
+                            <h3>5. Teori ekonomi Keynesian menekankan peran penting...</h3>
+                            <div class="quiz-options">
+                                <label class="quiz-option"><input type="radio" name="q5" value="a"> Pasar bebas</label>
+                                <label class="quiz-option"><input type="radio" name="q5" value="b"> Pemerintah dalam mengatur ekonomi</label>
+                                <label class="quiz-option"><input type="radio" name="q5" value="c"> Jumlah uang beredar</label>
+                                <label class="quiz-option"><input type="radio" name="q5" value="d"> Revolusi buruh</label>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-question">
+                            <h3>6. Perubahan apa yang dibawa oleh Revolusi Industri?</h3>
+                            <div class="quiz-options">
+                                <label class="quiz-option"><input type="radio" name="q6" value="a"> Dari ekonomi industri ke agraris</label>
+                                <label class="quiz-option"><input type="radio" name="q6" value="b"> Dari ekonomi agraris ke industri</label>
+                                <label class="quiz-option"><input type="radio" name="q6" value="c"> Dari ekonomi pasar ke terpusat</label>
+                                <label class="quiz-option"><input type="radio" name="q6" value="d"> Dari ekonomi modern ke tradisional</label>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-question">
+                            <h3>7. Siapakah penulis utama buku "Das Kapital"?</h3>
+                            <div class="quiz-options">
+                                <label class="quiz-option"><input type="radio" name="q7" value="a"> Adam Smith</label>
+                                <label class="quiz-option"><input type="radio" name="q7" value="b"> Karl Marx</label>
+                                <label class="quiz-option"><input type="radio" name="q7" value="c"> John Maynard Keynes</label>
+                                <label class="quiz-option"><input type="radio" name="q7" value="d"> David Ricardo</label>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-question">
+                            <h3>8. Pada masa ekonomi subsisten, kegiatan ekonomi terutama bertujuan untuk...</h3>
+                            <div class="quiz-options">
+                                <label class="quiz-option"><input type="radio" name="q8" value="a"> Menumpuk kekayaan</label>
+                                <label class="quiz-option"><input type="radio" name="q8" value="b"> Memenuhi kebutuhan sendiri</label>
+                                <label class="quiz-option"><input type="radio" name="q8" value="c"> Perdagangan internasional</label>
+                                <label class="quiz-option"><input type="radio" name="q8" value="d"> Ekspansi industri</label>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-question">
+                            <h3>9. Aliran ekonomi monetaris terutama dikaitkan dengan...</h3>
+                            <div class="quiz-options">
+                                <label class="quiz-option"><input type="radio" name="q9" value="a"> Karl Marx</label>
+                                <label class="quiz-option"><input type="radio" name="q9" value="b"> Milton Friedman</label>
+                                <label class="quiz-option"><input type="radio" name="q9" value="c"> John Maynard Keynes</label>
+                                <label class="quiz-option"><input type="radio" name="q9" value="d"> Adam Smith</label>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-question">
+                            <h3>10. Sistem ekonomi feodal terutama ditandai oleh...</h3>
+                            <div class="quiz-options">
+                                <label class="quiz-option"><input type="radio" name="q10" value="a"> Hubungan antara tuan tanah dan petani penggarap</label>
+                                <label class="quiz-option"><input type="radio" name="q10" value="b"> Pasar bebas yang kompetitif</label>
+                                <label class="quiz-option"><input type="radio" name="q10" value="c"> Kepemilikan negara atas alat produksi</label>
+                                <label class="quiz-option"><input type="radio" name="q10" value="d"> Perdagangan internasional yang luas</label>
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="submit-quiz" class="quiz-submit">Kirim Jawaban</button>
+                    </form>
+                    
+                    <div id="quiz-result" class="result-container">
+                        <h2>Hasil Kuis Anda</h2>
+                        <div class="score">0/10</div>
+                        <p class="feedback"></p>
+                        <button class="try-again" id="try-again-btn">Coba Lagi</button>
+                    </div>
+                </section>
+            </main>
+            
+            <aside class="sidebar">
+                <div class="sidebar-widget">
+                    <h3>Materi Pokok</h3>
+                    <ul>
+                        <li>Pengertian sejarah ekonomi</li>
+                        <li>Periode perkembangan ekonomi</li>
+                        <li>Tokoh-tokoh ekonomi</li>
+                        <li>Teori-teori ekonomi</li>
+                        <li>Pengaruh perkembangan ekonomi</li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3>Kompetensi Dasar</h3>
+                    <p>Menganalisis sejarah perkembangan pemikiran ekonomi dari masa pra-klasik, klasik, neo-klasik, hingga kontemporer.</p>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3>Indikator Pencapaian</h3>
+                    <ol>
+                        <li>Menjelaskan periodisasi perkembangan ekonomi</li>
+                        <li>Mengidentifikasi tokoh-tokoh ekonomi penting</li>
+                        <li>Membedakan aliran pemikiran ekonomi</li>
+                        <li>Menganalisis pengaruh perkembangan ekonomi</li>
+                    </ol>
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 EduEkonomi - Platform Pembelajaran Ekonomi untuk SMA</p>
+            <p>Dikembangkan untuk mendukung pendidikan di Indonesia</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Jawaban yang benar
+            const correctAnswers = {
+                q1: 'b',
+                q2: 'c',
+                q3: 'a',
+                q4: 'a',
+                q5: 'b',
+                q6: 'b',
+                q7: 'b',
+                q8: 'b',
+                q9: 'b',
+                q10: 'a'
             };
-            window.requestAnimationFrame(step);
-        }
-
-        // Fungsi reset kuis
-        function resetQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            selectedOption = null;
-            quizCompleted = false;
             
-            questionContainer.style.display = 'block';
-            resultContainer.style.display = 'none';
-            document.querySelector('.quiz-footer').style.display = 'flex';
+            // Tombol submit
+            const submitBtn = document.getElementById('submit-quiz');
+            const tryAgainBtn = document.getElementById('try-again-btn');
             
-            nextButton.textContent = 'Selanjutnya';
-            nextButton.style.display = 'none';
-            nextButton.disabled = true;
+            // Fungsi untuk menghitung skor
+            function calculateScore() {
+                let score = 0;
+                const form = document.getElementById('quiz-form');
+                
+                // Periksa setiap pertanyaan
+                for (let i = 1; i <= 10; i++) {
+                    const questionName = 'q' + i;
+                    const selectedOption = form.querySelector(input[name="${questionName}"]:checked);
+                    
+                    if (selectedOption && selectedOption.value === correctAnswers[questionName]) {
+                        score++;
+                    }
+                }
+                
+                return score;
+            }
             
-            showQuestion();
-        }
-
-        // Event listeners
-        nextButton.addEventListener('click', () => {
-            if (selectedOption === null && currentQuestionIndex < questions.length) return;
+            // Fungsi untuk menampilkan hasil
+            function showResult(score) {
+                const resultContainer = document.getElementById('quiz-result');
+                const scoreElement = resultContainer.querySelector('.score');
+                const feedbackElement = resultContainer.querySelector('.feedback');
+                
+                scoreElement.textContent = ${score}/10;
+                
+                // Berikan feedback berdasarkan skor
+                if (score >= 9) {
+                    feedbackElement.textContent = "Luar biasa! Anda sangat menguasai materi sejarah perkembangan ekonomi.";
+                } else if (score >= 7) {
+                    feedbackElement.textContent = "Bagus! Anda sudah memahami sebagian besar materi, tetapi masih ada yang perlu dipelajari lagi.";
+                } else if (score >= 5) {
+                    feedbackElement.textContent = "Cukup baik. Disarankan untuk mempelajari kembali materi yang belum dikuasai.";
+                } else {
+                    feedbackElement.textContent = "Anda perlu mempelajari kembali materi sejarah perkembangan ekonomi dengan lebih serius.";
+                }
+                
+                resultContainer.style.display = 'block';
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
+            }
             
-            // Periksa jawaban terlebih dahulu
-            checkAnswer();
-            
-            // Tunggu sebentar sebelum pindah ke pertanyaan berikutnya
-            setTimeout(() => {
-                currentQuestionIndex++;
-                showQuestion();
-            }, 1000);
-        });
-
-        restartButton.addEventListener('click', resetQuiz);
-
-        // Mulai kuis
-        showQuestion();
-
-        // Animasi scroll halus untuk link navigasi
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
+            // Fungsi untuk mereset kuis
+            function resetQuiz() {
+                document.getElementById('quiz-form').reset();
+                document.getElementById('quiz-result').style.display = 'none';
+                window.scrollTo({
+                    top: document.getElementById('kuis').offsetTop,
                     behavior: 'smooth'
                 });
+            }
+            
+            // Event listener untuk tombol submit
+            submitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Hitung skor
+                const score = calculateScore();
+                
+                // Tampilkan hasil
+                showResult(score);
             });
+            
+            // Event listener untuk tombol coba lagi
+            tryAgainBtn.addEventListener('click', resetQuiz);
         });
-    });
-</script>
+    </script>
+</body>
+</html>
