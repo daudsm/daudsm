@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Belajar Ekonomi SMK - Perdagangan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>📚 Belajar Ekonomi SMK</h1>
+    <p>Materi: Perdagangan Dalam Negeri & Internasional</p>
+  </header>
+
+  <main>
+    <button onclick="window.location.href='materi.html'">📖 Baca Materi</button>
+    <button onclick="window.location.href='kuis.html'">📝 Mulai Kuis</button>
+  </main>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Materi Perdagangan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>📖 Materi Perdagangan</h1>
+  </header>
+
+  <main>
+    <h2>1. Perdagangan Dalam Negeri</h2>
+    <p>Perdagangan dalam negeri adalah aktivitas jual beli barang atau jasa yang dilakukan antarwilayah dalam satu negara.</p>
+
+    <h2>2. Perdagangan Internasional</h2>
+    <p>Perdagangan internasional adalah kegiatan jual beli antarnegara untuk memenuhi kebutuhan masing-masing negara.</p>
+
+    <a href="index.html">⬅️ Kembali</a>
+  </main>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kuis Ekonomi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>📝 Kuis: Perdagangan</h1>
+    <div id="quiz-container">
+      <p id="question">Memuat soal...</p>
+      <div id="options"></div>
+      <button onclick="nextQuestion()">Soal Selanjutnya</button>
+      <p id="score"></p>
+    </div>
+    <a href="index.html">⬅️ Kembali</a>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+const questions = [
+  {
+    question: "Apa yang dimaksud dengan perdagangan dalam negeri?",
+    options: [
+      "Kegiatan ekspor barang ke luar negeri",
+      "Jual beli antarwilayah dalam satu negara",
+      "Transaksi antara dua perusahaan internasional",
+      "Kegiatan ekspor-impor antarnegara"
+    ],
+    answer: 1
+  },
+  {
+    question: "Perdagangan internasional terjadi antar...",
+    options: [
+      "Kelurahan",
+      "Wilayah provinsi",
+      "Negara",
+      "Kota"
+    ],
+    answer: 2
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  const q = questions[currentQuestion];
+  document.getElementById("question").textContent = q.question;
+
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.onclick = () => checkAnswer(i);
+    optionsDiv.appendChild(btn);
+  });
+}
+
+function checkAnswer(selected) {
+  const correct = questions[currentQuestion].answer;
+  if (selected === correct) {
+    alert("✅ Benar!");
+    score++;
+  } else {
+    alert("❌ Salah.");
+  }
+  currentQuestion++;
+  nextQuestion();
+}
+
+function nextQuestion() {
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    document.getElementById("quiz-container").innerHTML = `
+      <h2>🎉 Kuis Selesai!</h2>
+      <p>Skor kamu: ${score} dari ${questions.length}</p>
+    `;
+  }
+}
+
+window.onload = showQuestion;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  text-align: center;
+  padding: 20px;
+}
+
+header {
+  background-color: #2d6cdf;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+main {
+  margin-top: 20px;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#quiz-container {
+  margin-top: 30px;
+}
